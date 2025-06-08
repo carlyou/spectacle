@@ -6,14 +6,30 @@ windowPositionCalculationRegistry.registerWindowPositionCalculationWithAction(fu
         var twoThirdRect = SpectacleCalculationHelpers.copyRect(oneHalfRect);
         twoThirdRect.width = Math.floor(visibleFrameOfDestinationScreen.width * 2 / 3.0);
         twoThirdRect.x = visibleFrameOfDestinationScreen.x + visibleFrameOfDestinationScreen.width - twoThirdRect.width;
+        var oneThirdRect = SpectacleCalculationHelpers.copyRect(oneHalfRect);
+        oneThirdRect.width = Math.floor(visibleFrameOfDestinationScreen.width / 3.0);
+        oneThirdRect.x = visibleFrameOfDestinationScreen.x + visibleFrameOfDestinationScreen.width - oneThirdRect.width;
+        var threeQuarterRect = SpectacleCalculationHelpers.copyRect(oneHalfRect);
+        threeQuarterRect.width = Math.floor(visibleFrameOfDestinationScreen.width * 3 / 4.0);
+        threeQuarterRect.x = visibleFrameOfDestinationScreen.x + visibleFrameOfDestinationScreen.width - threeQuarterRect.width;
+        var oneQuarterRect = SpectacleCalculationHelpers.copyRect(oneHalfRect);
+        oneQuarterRect.width = Math.floor(visibleFrameOfDestinationScreen.width / 4.0);
+        oneQuarterRect.x = visibleFrameOfDestinationScreen.x + visibleFrameOfDestinationScreen.width - oneQuarterRect.width;
+
         if (SpectacleCalculationHelpers.rectCenteredWithinRect(oneHalfRect, windowRect)) {
             return twoThirdRect;
         }
         if (SpectacleCalculationHelpers.rectCenteredWithinRect(twoThirdRect, windowRect)) {
-            var oneThirdsRect = SpectacleCalculationHelpers.copyRect(oneHalfRect);
-            oneThirdsRect.width = Math.floor(visibleFrameOfDestinationScreen.width / 3.0);
-            oneThirdsRect.x = visibleFrameOfDestinationScreen.x + visibleFrameOfDestinationScreen.width - oneThirdsRect.width;
-            return oneThirdsRect;
+            return oneThirdRect;
+        }
+        if (SpectacleCalculationHelpers.rectCenteredWithinRect(oneThirdRect, windowRect)) {
+            return threeQuarterRect;
+        }
+        if (SpectacleCalculationHelpers.rectCenteredWithinRect(threeQuarterRect, windowRect)) {
+            return oneQuarterRect;
+        }
+        if (SpectacleCalculationHelpers.rectCenteredWithinRect(oneQuarterRect, windowRect)) {
+            return oneHalfRect;
         }
     }
     return oneHalfRect;
